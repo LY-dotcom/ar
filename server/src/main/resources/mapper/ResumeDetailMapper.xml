@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wpz.ar.mapper.ResumeDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.wpz.ar.domain.ResumeDetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="applicant_id" property="applicantId" jdbcType="INTEGER" />
+    <result column="aname" property="aname" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="VARCHAR" />
+    <result column="station_type_id" property="stationTypeId" jdbcType="INTEGER" />
+    <result column="location_id" property="locationId" jdbcType="INTEGER" />
+    <result column="min_salary" property="minSalary" jdbcType="INTEGER" />
+    <result column="max_salary" property="maxSalary" jdbcType="INTEGER" />
+    <result column="education_info" property="educationInfo" jdbcType="VARCHAR" />
+    <result column="program_info" property="programInfo" jdbcType="VARCHAR" />
+    <result column="work_info" property="workInfo" jdbcType="VARCHAR" />
+    <result column="self_info" property="selfInfo" jdbcType="VARCHAR" />
+    <result column="profile_path" property="profilePath" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, applicant_id, aname, age, sex, phone, email, birthday, station_type_id, location_id, 
+    min_salary, max_salary, education_info, program_info, work_info, self_info, profile_path
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wpz.ar.domain.ResumeDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from resume_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from resume_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from resume_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wpz.ar.domain.ResumeDetailExample" >
+    delete from resume_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wpz.ar.domain.ResumeDetail" >
+    insert into resume_detail (id, applicant_id, aname, 
+      age, sex, phone, email, 
+      birthday, station_type_id, location_id, 
+      min_salary, max_salary, education_info, 
+      program_info, work_info, self_info, 
+      profile_path)
+    values (#{id,jdbcType=INTEGER}, #{applicantId,jdbcType=INTEGER}, #{aname,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=VARCHAR}, #{stationTypeId,jdbcType=INTEGER}, #{locationId,jdbcType=INTEGER}, 
+      #{minSalary,jdbcType=INTEGER}, #{maxSalary,jdbcType=INTEGER}, #{educationInfo,jdbcType=VARCHAR}, 
+      #{programInfo,jdbcType=VARCHAR}, #{workInfo,jdbcType=VARCHAR}, #{selfInfo,jdbcType=VARCHAR}, 
+      #{profilePath,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wpz.ar.domain.ResumeDetail" >
+    insert into resume_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="applicantId != null" >
+        applicant_id,
+      </if>
+      <if test="aname != null" >
+        aname,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="stationTypeId != null" >
+        station_type_id,
+      </if>
+      <if test="locationId != null" >
+        location_id,
+      </if>
+      <if test="minSalary != null" >
+        min_salary,
+      </if>
+      <if test="maxSalary != null" >
+        max_salary,
+      </if>
+      <if test="educationInfo != null" >
+        education_info,
+      </if>
+      <if test="programInfo != null" >
+        program_info,
+      </if>
+      <if test="workInfo != null" >
+        work_info,
+      </if>
+      <if test="selfInfo != null" >
+        self_info,
+      </if>
+      <if test="profilePath != null" >
+        profile_path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="applicantId != null" >
+        #{applicantId,jdbcType=INTEGER},
+      </if>
+      <if test="aname != null" >
+        #{aname,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="stationTypeId != null" >
+        #{stationTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="locationId != null" >
+        #{locationId,jdbcType=INTEGER},
+      </if>
+      <if test="minSalary != null" >
+        #{minSalary,jdbcType=INTEGER},
+      </if>
+      <if test="maxSalary != null" >
+        #{maxSalary,jdbcType=INTEGER},
+      </if>
+      <if test="educationInfo != null" >
+        #{educationInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="programInfo != null" >
+        #{programInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="workInfo != null" >
+        #{workInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="selfInfo != null" >
+        #{selfInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="profilePath != null" >
+        #{profilePath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wpz.ar.domain.ResumeDetailExample" resultType="java.lang.Integer" >
+    select count(*) from resume_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update resume_detail
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.applicantId != null" >
+        applicant_id = #{record.applicantId,jdbcType=INTEGER},
+      </if>
+      <if test="record.aname != null" >
+        aname = #{record.aname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null" >
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null" >
+        birthday = #{record.birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationTypeId != null" >
+        station_type_id = #{record.stationTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.locationId != null" >
+        location_id = #{record.locationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.minSalary != null" >
+        min_salary = #{record.minSalary,jdbcType=INTEGER},
+      </if>
+      <if test="record.maxSalary != null" >
+        max_salary = #{record.maxSalary,jdbcType=INTEGER},
+      </if>
+      <if test="record.educationInfo != null" >
+        education_info = #{record.educationInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.programInfo != null" >
+        program_info = #{record.programInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workInfo != null" >
+        work_info = #{record.workInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.selfInfo != null" >
+        self_info = #{record.selfInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.profilePath != null" >
+        profile_path = #{record.profilePath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update resume_detail
+    set id = #{record.id,jdbcType=INTEGER},
+      applicant_id = #{record.applicantId,jdbcType=INTEGER},
+      aname = #{record.aname,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=INTEGER},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=VARCHAR},
+      station_type_id = #{record.stationTypeId,jdbcType=INTEGER},
+      location_id = #{record.locationId,jdbcType=INTEGER},
+      min_salary = #{record.minSalary,jdbcType=INTEGER},
+      max_salary = #{record.maxSalary,jdbcType=INTEGER},
+      education_info = #{record.educationInfo,jdbcType=VARCHAR},
+      program_info = #{record.programInfo,jdbcType=VARCHAR},
+      work_info = #{record.workInfo,jdbcType=VARCHAR},
+      self_info = #{record.selfInfo,jdbcType=VARCHAR},
+      profile_path = #{record.profilePath,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wpz.ar.domain.ResumeDetail" >
+    update resume_detail
+    <set >
+      <if test="applicantId != null" >
+        applicant_id = #{applicantId,jdbcType=INTEGER},
+      </if>
+      <if test="aname != null" >
+        aname = #{aname,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="stationTypeId != null" >
+        station_type_id = #{stationTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="locationId != null" >
+        location_id = #{locationId,jdbcType=INTEGER},
+      </if>
+      <if test="minSalary != null" >
+        min_salary = #{minSalary,jdbcType=INTEGER},
+      </if>
+      <if test="maxSalary != null" >
+        max_salary = #{maxSalary,jdbcType=INTEGER},
+      </if>
+      <if test="educationInfo != null" >
+        education_info = #{educationInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="programInfo != null" >
+        program_info = #{programInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="workInfo != null" >
+        work_info = #{workInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="selfInfo != null" >
+        self_info = #{selfInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="profilePath != null" >
+        profile_path = #{profilePath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wpz.ar.domain.ResumeDetail" >
+    update resume_detail
+    set applicant_id = #{applicantId,jdbcType=INTEGER},
+      aname = #{aname,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      station_type_id = #{stationTypeId,jdbcType=INTEGER},
+      location_id = #{locationId,jdbcType=INTEGER},
+      min_salary = #{minSalary,jdbcType=INTEGER},
+      max_salary = #{maxSalary,jdbcType=INTEGER},
+      education_info = #{educationInfo,jdbcType=VARCHAR},
+      program_info = #{programInfo,jdbcType=VARCHAR},
+      work_info = #{workInfo,jdbcType=VARCHAR},
+      self_info = #{selfInfo,jdbcType=VARCHAR},
+      profile_path = #{profilePath,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

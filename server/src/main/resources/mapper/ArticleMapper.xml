@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wpz.ar.mapper.ArticleMapper" >
+  <resultMap id="BaseResultMap" type="com.wpz.ar.domain.Article" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="prise_cnt" property="priseCnt" jdbcType="INTEGER" />
+    <result column="view_cnt" property="viewCnt" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="profile_path" property="profilePath" jdbcType="VARCHAR" />
+    <result column="applicant_id" property="applicantId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="check_info" property="checkInfo" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.wpz.ar.domain.Article" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, prise_cnt, view_cnt, create_time, profile_path, applicant_id, status, 
+    check_info
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.wpz.ar.domain.ArticleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wpz.ar.domain.ArticleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from article
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from article
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wpz.ar.domain.ArticleExample" >
+    delete from article
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wpz.ar.domain.Article" >
+    insert into article (id, title, prise_cnt, 
+      view_cnt, create_time, profile_path, 
+      applicant_id, status, check_info, 
+      content)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{priseCnt,jdbcType=INTEGER}, 
+      #{viewCnt,jdbcType=INTEGER}, #{createTime,jdbcType=VARCHAR}, #{profilePath,jdbcType=VARCHAR}, 
+      #{applicantId,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, #{checkInfo,jdbcType=VARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wpz.ar.domain.Article" >
+    insert into article
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="priseCnt != null" >
+        prise_cnt,
+      </if>
+      <if test="viewCnt != null" >
+        view_cnt,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="profilePath != null" >
+        profile_path,
+      </if>
+      <if test="applicantId != null" >
+        applicant_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="checkInfo != null" >
+        check_info,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="priseCnt != null" >
+        #{priseCnt,jdbcType=INTEGER},
+      </if>
+      <if test="viewCnt != null" >
+        #{viewCnt,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="profilePath != null" >
+        #{profilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="applicantId != null" >
+        #{applicantId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="checkInfo != null" >
+        #{checkInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wpz.ar.domain.ArticleExample" resultType="java.lang.Integer" >
+    select count(*) from article
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update article
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priseCnt != null" >
+        prise_cnt = #{record.priseCnt,jdbcType=INTEGER},
+      </if>
+      <if test="record.viewCnt != null" >
+        view_cnt = #{record.viewCnt,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.profilePath != null" >
+        profile_path = #{record.profilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applicantId != null" >
+        applicant_id = #{record.applicantId,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkInfo != null" >
+        check_info = #{record.checkInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update article
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      prise_cnt = #{record.priseCnt,jdbcType=INTEGER},
+      view_cnt = #{record.viewCnt,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      profile_path = #{record.profilePath,jdbcType=VARCHAR},
+      applicant_id = #{record.applicantId,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=VARCHAR},
+      check_info = #{record.checkInfo,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update article
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      prise_cnt = #{record.priseCnt,jdbcType=INTEGER},
+      view_cnt = #{record.viewCnt,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      profile_path = #{record.profilePath,jdbcType=VARCHAR},
+      applicant_id = #{record.applicantId,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=VARCHAR},
+      check_info = #{record.checkInfo,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wpz.ar.domain.Article" >
+    update article
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="priseCnt != null" >
+        prise_cnt = #{priseCnt,jdbcType=INTEGER},
+      </if>
+      <if test="viewCnt != null" >
+        view_cnt = #{viewCnt,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="profilePath != null" >
+        profile_path = #{profilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="applicantId != null" >
+        applicant_id = #{applicantId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="checkInfo != null" >
+        check_info = #{checkInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.wpz.ar.domain.Article" >
+    update article
+    set title = #{title,jdbcType=VARCHAR},
+      prise_cnt = #{priseCnt,jdbcType=INTEGER},
+      view_cnt = #{viewCnt,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      profile_path = #{profilePath,jdbcType=VARCHAR},
+      applicant_id = #{applicantId,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      check_info = #{checkInfo,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wpz.ar.domain.Article" >
+    update article
+    set title = #{title,jdbcType=VARCHAR},
+      prise_cnt = #{priseCnt,jdbcType=INTEGER},
+      view_cnt = #{viewCnt,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      profile_path = #{profilePath,jdbcType=VARCHAR},
+      applicant_id = #{applicantId,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      check_info = #{checkInfo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

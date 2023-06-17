@@ -1,0 +1,26 @@
+
+spring:
+ datasource:
+  url: jdbc:mysql://localhost:3306/ar?characterEncoding=utf-8&serverTimezone=GMT%2B8
+  username: root
+  password: Ww233435
+  type: com.alibaba.druid.pool.DruidDataSource
+ servlet:
+  multipart:
+   max-file-size: 100MB
+ web:
+  resources:
+   static-locations:
+mybatis:
+ #标注待解析的mapper的xml文件位置
+ mapper-locations: classpath:mapper/*.xml
+ #标注实体类位置
+ type-aliases-package: com.wpz.ar.domain
+logging:
+ level:
+  root: info
+  com.wpz.ar.mapper: debug
+server:
+ port: 1000
+
+

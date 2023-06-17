@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wpz.ar.mapper.ApplyRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.wpz.ar.domain.ApplyRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="resume_id" property="resumeId" jdbcType="INTEGER" />
+    <result column="station_id" property="stationId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="apply_date" property="applyDate" jdbcType="VARCHAR" />
+    <result column="meeting_datetime" property="meetingDatetime" jdbcType="VARCHAR" />
+    <result column="meeting_num" property="meetingNum" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, resume_id, station_id, status, apply_date, meeting_datetime, meeting_num
+  </sql>
+  <select id="getApplyRecords" resultType="com.wpz.ar.domain.ApplyRecord" parameterType="com.wpz.ar.domain.ApplyRecordDto">
+    select
+        ar.id id, ar.resume_id resumeId, ar.station_id stationId, ar.status, ar.apply_date applyDate
+         , ar.meeting_datetime meetingDatetime, ar.meeting_num meetingNum
+        from apply_record ar, station s, resume r, company c, applicant a
+    <where>
+      and ar.resume_id = r.id
+        and ar.station_id = s.id
+        and s.company_id = c.id
+        and r.applicant_id = a.id
+        <if test="stationId != null">
+          and ar.station_id = #{stationId}
+        </if>
+      <if test="applicantId != null">
+        and a.id = #{applicantId}
+      </if>
+      <if test="companyId != null">
+        and c.id = #{companyId}
+      </if>
+      <if test="status != null">
+        and ar.status = #{status}
+      </if>
+      <if test="education != null and education != ''">
+        and a.education = #{education}
+      </if>
+      <if test="username != null and username != ''">
+        and a.username like '%${username}%'
+      </if>
+      <if test="title != null and title != ''">
+        and c.title like '%${title}%'
+      </if>
+    </where>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wpz.ar.domain.ApplyRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from apply_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from apply_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from apply_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wpz.ar.domain.ApplyRecordExample" >
+    delete from apply_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wpz.ar.domain.ApplyRecord" >
+    insert into apply_record (id, resume_id, station_id, 
+      status, apply_date, meeting_datetime, 
+      meeting_num)
+    values (#{id,jdbcType=INTEGER}, #{resumeId,jdbcType=INTEGER}, #{stationId,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{applyDate,jdbcType=VARCHAR}, #{meetingDatetime,jdbcType=VARCHAR}, 
+      #{meetingNum,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wpz.ar.domain.ApplyRecord" >
+    insert into apply_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="resumeId != null" >
+        resume_id,
+      </if>
+      <if test="stationId != null" >
+        station_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="applyDate != null" >
+        apply_date,
+      </if>
+      <if test="meetingDatetime != null" >
+        meeting_datetime,
+      </if>
+      <if test="meetingNum != null" >
+        meeting_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="resumeId != null" >
+        #{resumeId,jdbcType=INTEGER},
+      </if>
+      <if test="stationId != null" >
+        #{stationId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="applyDate != null" >
+        #{applyDate,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingDatetime != null" >
+        #{meetingDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingNum != null" >
+        #{meetingNum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wpz.ar.domain.ApplyRecordExample" resultType="java.lang.Integer" >
+    select count(*) from apply_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update apply_record
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.resumeId != null" >
+        resume_id = #{record.resumeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.stationId != null" >
+        station_id = #{record.stationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.applyDate != null" >
+        apply_date = #{record.applyDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingDatetime != null" >
+        meeting_datetime = #{record.meetingDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingNum != null" >
+        meeting_num = #{record.meetingNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update apply_record
+    set id = #{record.id,jdbcType=INTEGER},
+      resume_id = #{record.resumeId,jdbcType=INTEGER},
+      station_id = #{record.stationId,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      apply_date = #{record.applyDate,jdbcType=VARCHAR},
+      meeting_datetime = #{record.meetingDatetime,jdbcType=VARCHAR},
+      meeting_num = #{record.meetingNum,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wpz.ar.domain.ApplyRecord" >
+    update apply_record
+    <set >
+      <if test="resumeId != null" >
+        resume_id = #{resumeId,jdbcType=INTEGER},
+      </if>
+      <if test="stationId != null" >
+        station_id = #{stationId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="applyDate != null" >
+        apply_date = #{applyDate,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingDatetime != null" >
+        meeting_datetime = #{meetingDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingNum != null" >
+        meeting_num = #{meetingNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wpz.ar.domain.ApplyRecord" >
+    update apply_record
+    set resume_id = #{resumeId,jdbcType=INTEGER},
+      station_id = #{stationId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      apply_date = #{applyDate,jdbcType=VARCHAR},
+      meeting_datetime = #{meetingDatetime,jdbcType=VARCHAR},
+      meeting_num = #{meetingNum,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

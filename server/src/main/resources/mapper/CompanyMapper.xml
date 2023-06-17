@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wpz.ar.mapper.CompanyMapper" >
+  <resultMap id="BaseResultMap" type="com.wpz.ar.domain.Company" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="location_id" property="locationId" jdbcType="INTEGER" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="build_date" property="buildDate" jdbcType="VARCHAR" />
+    <result column="build_capital" property="buildCapital" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="logo_path" property="logoPath" jdbcType="VARCHAR" />
+    <result column="profile_path" property="profilePath" jdbcType="VARCHAR" />
+    <result column="location_detail" property="locationDetail" jdbcType="VARCHAR" />
+    <result column="check_info" property="checkInfo" jdbcType="VARCHAR" />
+    <result column="prosession" property="prosession" jdbcType="VARCHAR" />
+    <result column="user_status" property="userStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.wpz.ar.domain.Company" extends="BaseResultMap" >
+    <result column="descs" property="descs" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, username, password, title, location_id, phone, email, build_date, build_capital, 
+    status, logo_path, profile_path, location_detail, check_info, prosession, user_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    descs
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.wpz.ar.domain.CompanyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from company
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wpz.ar.domain.CompanyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from company
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from company
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from company
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wpz.ar.domain.CompanyExample" >
+    delete from company
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wpz.ar.domain.Company" >
+    insert into company (id, username, password, 
+      title, location_id, phone, 
+      email, build_date, build_capital, 
+      status, logo_path, profile_path, 
+      location_detail, check_info, prosession, 
+      user_status, descs)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{locationId,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{buildDate,jdbcType=VARCHAR}, #{buildCapital,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{logoPath,jdbcType=VARCHAR}, #{profilePath,jdbcType=VARCHAR}, 
+      #{locationDetail,jdbcType=VARCHAR}, #{checkInfo,jdbcType=VARCHAR}, #{prosession,jdbcType=VARCHAR}, 
+      #{userStatus,jdbcType=INTEGER}, #{descs,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wpz.ar.domain.Company" >
+    insert into company
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="locationId != null" >
+        location_id,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="buildDate != null" >
+        build_date,
+      </if>
+      <if test="buildCapital != null" >
+        build_capital,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="logoPath != null" >
+        logo_path,
+      </if>
+      <if test="profilePath != null" >
+        profile_path,
+      </if>
+      <if test="locationDetail != null" >
+        location_detail,
+      </if>
+      <if test="checkInfo != null" >
+        check_info,
+      </if>
+      <if test="prosession != null" >
+        prosession,
+      </if>
+      <if test="userStatus != null" >
+        user_status,
+      </if>
+      <if test="descs != null" >
+        descs,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="locationId != null" >
+        #{locationId,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="buildDate != null" >
+        #{buildDate,jdbcType=VARCHAR},
+      </if>
+      <if test="buildCapital != null" >
+        #{buildCapital,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="logoPath != null" >
+        #{logoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="profilePath != null" >
+        #{profilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="locationDetail != null" >
+        #{locationDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="checkInfo != null" >
+        #{checkInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="prosession != null" >
+        #{prosession,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null" >
+        #{userStatus,jdbcType=INTEGER},
+      </if>
+      <if test="descs != null" >
+        #{descs,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wpz.ar.domain.CompanyExample" resultType="java.lang.Integer" >
+    select count(*) from company
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update company
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locationId != null" >
+        location_id = #{record.locationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buildDate != null" >
+        build_date = #{record.buildDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buildCapital != null" >
+        build_capital = #{record.buildCapital,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.logoPath != null" >
+        logo_path = #{record.logoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.profilePath != null" >
+        profile_path = #{record.profilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locationDetail != null" >
+        location_detail = #{record.locationDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkInfo != null" >
+        check_info = #{record.checkInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prosession != null" >
+        prosession = #{record.prosession,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userStatus != null" >
+        user_status = #{record.userStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.descs != null" >
+        descs = #{record.descs,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update company
+    set id = #{record.id,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      location_id = #{record.locationId,jdbcType=INTEGER},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      build_date = #{record.buildDate,jdbcType=VARCHAR},
+      build_capital = #{record.buildCapital,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      logo_path = #{record.logoPath,jdbcType=VARCHAR},
+      profile_path = #{record.profilePath,jdbcType=VARCHAR},
+      location_detail = #{record.locationDetail,jdbcType=VARCHAR},
+      check_info = #{record.checkInfo,jdbcType=VARCHAR},
+      prosession = #{record.prosession,jdbcType=VARCHAR},
+      user_status = #{record.userStatus,jdbcType=INTEGER},
+      descs = #{record.descs,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update company
+    set id = #{record.id,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      location_id = #{record.locationId,jdbcType=INTEGER},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      build_date = #{record.buildDate,jdbcType=VARCHAR},
+      build_capital = #{record.buildCapital,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      logo_path = #{record.logoPath,jdbcType=VARCHAR},
+      profile_path = #{record.profilePath,jdbcType=VARCHAR},
+      location_detail = #{record.locationDetail,jdbcType=VARCHAR},
+      check_info = #{record.checkInfo,jdbcType=VARCHAR},
+      prosession = #{record.prosession,jdbcType=VARCHAR},
+      user_status = #{record.userStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wpz.ar.domain.Company" >
+    update company
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="locationId != null" >
+        location_id = #{locationId,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="buildDate != null" >
+        build_date = #{buildDate,jdbcType=VARCHAR},
+      </if>
+      <if test="buildCapital != null" >
+        build_capital = #{buildCapital,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="logoPath != null" >
+        logo_path = #{logoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="profilePath != null" >
+        profile_path = #{profilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="locationDetail != null" >
+        location_detail = #{locationDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="checkInfo != null" >
+        check_info = #{checkInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="prosession != null" >
+        prosession = #{prosession,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null" >
+        user_status = #{userStatus,jdbcType=INTEGER},
+      </if>
+      <if test="descs != null" >
+        descs = #{descs,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.wpz.ar.domain.Company" >
+    update company
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      location_id = #{locationId,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      build_date = #{buildDate,jdbcType=VARCHAR},
+      build_capital = #{buildCapital,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      logo_path = #{logoPath,jdbcType=VARCHAR},
+      profile_path = #{profilePath,jdbcType=VARCHAR},
+      location_detail = #{locationDetail,jdbcType=VARCHAR},
+      check_info = #{checkInfo,jdbcType=VARCHAR},
+      prosession = #{prosession,jdbcType=VARCHAR},
+      user_status = #{userStatus,jdbcType=INTEGER},
+      descs = #{descs,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wpz.ar.domain.Company" >
+    update company
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      location_id = #{locationId,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      build_date = #{buildDate,jdbcType=VARCHAR},
+      build_capital = #{buildCapital,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      logo_path = #{logoPath,jdbcType=VARCHAR},
+      profile_path = #{profilePath,jdbcType=VARCHAR},
+      location_detail = #{locationDetail,jdbcType=VARCHAR},
+      check_info = #{checkInfo,jdbcType=VARCHAR},
+      prosession = #{prosession,jdbcType=VARCHAR},
+      user_status = #{userStatus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

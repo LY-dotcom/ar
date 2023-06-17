@@ -1,0 +1,87 @@
+2023-02-16 12:44:09.639 [restartedMain] ERROR o.s.b.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'logging.level.com.wpz' to org.springframework.boot.logging.LogLevel:
+
+    Property: logging.level.com.wpz
+    Value: "info  //对应包下的日志级别"
+    Origin: class path resource [application.yml] - 15:12
+    Reason: failed to convert java.lang.String to org.springframework.boot.logging.LogLevel (caused by java.lang.IllegalArgumentException: No enum constant org.springframework.boot.logging.LogLevel.info  //对应包下的日志级别)
+
+Action:
+
+Update your application's configuration. The following values are valid:
+
+    DEBUG
+    ERROR
+    FATAL
+    INFO
+    OFF
+    TRACE
+    WARN
+
+2023-02-16 12:46:36.749 [restartedMain] INFO  com.wpz.ar.ServerApplication - Starting ServerApplication using Java 1.8.0_352 on macbook14.bbrouter with PID 53581 (/Users/wangpengze/vue-demo/server/target/classes started by wangpengze in /Users/wangpengze/vue-demo/server)
+2023-02-16 12:46:36.751 [restartedMain] INFO  com.wpz.ar.ServerApplication - No active profile set, falling back to 1 default profile: "default"
+2023-02-16 12:46:36.780 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-02-16 12:46:36.780 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-02-16 12:46:37.376 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-02-16 12:46:37.381 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2023-02-16 12:46:37.381 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-02-16 12:46:37.381 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-02-16 12:46:37.408 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-02-16 12:46:37.408 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 628 ms
+2023-02-16 12:46:37.459 [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2023-02-16 12:46:37.534 [restartedMain] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2023-02-16 12:46:37.835 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-02-16 12:46:37.851 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2023-02-16 12:46:37.864 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2023-02-16 12:46:37.871 [restartedMain] INFO  com.wpz.ar.ServerApplication - Started ServerApplication in 1.345 seconds (JVM running for 1.77)
+2023-02-16 12:46:53.015 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-02-16 12:46:53.016 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-02-16 12:46:53.017 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2023-02-16 12:49:01.217 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2023-02-16 12:49:03.494 [restartedMain] INFO  com.wpz.ar.ServerApplication - Starting ServerApplication using Java 1.8.0_352 on macbook14.bbrouter with PID 53877 (/Users/wangpengze/vue-demo/server/target/classes started by wangpengze in /Users/wangpengze/vue-demo/server)
+2023-02-16 12:49:03.495 [restartedMain] INFO  com.wpz.ar.ServerApplication - No active profile set, falling back to 1 default profile: "default"
+2023-02-16 12:49:03.524 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-02-16 12:49:03.524 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-02-16 12:49:04.091 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-02-16 12:49:04.096 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2023-02-16 12:49:04.096 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-02-16 12:49:04.096 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-02-16 12:49:04.130 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-02-16 12:49:04.130 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 606 ms
+2023-02-16 12:49:04.185 [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2023-02-16 12:49:04.254 [restartedMain] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2023-02-16 12:49:04.563 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-02-16 12:49:04.579 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2023-02-16 12:49:04.591 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2023-02-16 12:49:04.598 [restartedMain] INFO  com.wpz.ar.ServerApplication - Started ServerApplication in 1.315 seconds (JVM running for 1.74)
+2023-02-16 12:49:09.476 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-02-16 12:49:09.477 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-02-16 12:49:09.477 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2023-02-16 12:50:27.603 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2023-02-16 12:50:29.506 [restartedMain] INFO  com.wpz.ar.ServerApplication - Starting ServerApplication using Java 1.8.0_352 on macbook14.bbrouter with PID 54115 (/Users/wangpengze/vue-demo/server/target/classes started by wangpengze in /Users/wangpengze/vue-demo/server)
+2023-02-16 12:50:29.507 [restartedMain] INFO  com.wpz.ar.ServerApplication - No active profile set, falling back to 1 default profile: "default"
+2023-02-16 12:50:29.538 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-02-16 12:50:29.538 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-02-16 12:50:30.123 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-02-16 12:50:30.128 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2023-02-16 12:50:30.129 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-02-16 12:50:30.129 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-02-16 12:50:30.170 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-02-16 12:50:30.170 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 632 ms
+2023-02-16 12:50:30.219 [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2023-02-16 12:50:30.289 [restartedMain] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2023-02-16 12:50:30.597 [restartedMain] INFO  o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-02-16 12:50:30.614 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2023-02-16 12:50:30.627 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2023-02-16 12:50:30.633 [restartedMain] INFO  com.wpz.ar.ServerApplication - Started ServerApplication in 1.35 seconds (JVM running for 1.735)
+2023-02-16 12:50:56.117 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-02-16 12:50:56.117 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-02-16 12:50:56.118 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2023-02-16 12:54:06.648 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
